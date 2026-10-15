@@ -6,15 +6,17 @@
 
 <!-- Written by the Team before the code: your own choice, a few sentences per answer. Everything else in the Submission follows from it. -->
 
-**Enterprise:** <!-- Which mining enterprise, or which part of it, the twin represents. -->
+## Concept
 
-**Users:** <!-- Who uses the twin. -->
+**Enterprise:** Қашар темір кені карьері (Қазақстан, Қостанай облысы). Жобада карьердің кен өндіру және тасымалдау процестерінің цифрлық егізі жасалады.
 
-**Decision:** <!-- Which decision the twin helps them make. -->
+**Users:** Карьер диспетчерлері, өндіріс инженерлері және ауысым басшылары.
 
-**Why this choice:** <!-- Why this enterprise, these users and this decision. -->
+**Decision:** Цифрлық егіз өндіріс өнімділігін жоспарлауға және арттыруға көмектеседі. Жүйе экскаваторлар мен самосвалдардың жұмысын модельдеп, техниканың жүктемесін, тоқтап қалу уақытын және тасымалданатын кен көлемін есептеуге арналған. Пайдаланушы әртүрлі өндірістік сценарийлерді салыстырып, тиімді жұмыс жоспарын таңдай алады.
 
-**Real or fictional:** <!-- A real object: name it and give the sources of its numbers. A fictional one: which real objects it resembles and where its numbers come from. A real object with sourced numbers scores higher. -->
+**Why this choice:** Мен Қашар карьерін таңдадым, себебі нақты кеніш негізінде өндіріс өнімділігін арттыру жолдарын зерттегім келеді. Менің мақсатым — техниканың бос тұру уақытын азайтып, кен өндіру мен тасымалдау жұмысын тиімді жоспарлайтын цифрлық жүйе жасау.
+
+**Real or fictional:** Жоба Қазақстандағы нақты Қашар темір кені карьеріне негізделеді. Карьер мен техниканың ашық жарияланған сипаттамалары пайдаланылатын болады. Қолжетімсіз өндірістік көрсеткіштер модельдік болжамдар ретінде белгіленеді. Жоба нақты карьердің толық көшірмесі емес, оның өндіріс өнімділігін жоспарлауға арналған цифрлық моделі болады.
 
 ## Team
 
