@@ -1,64 +1,110 @@
-# SUBMISSION
-
-<!-- Fill in every section. The AI Jury studies this file together with the code, the Build Report, the presentation and the Stand's interface. Accepted languages: English, Kazakh, Russian. These hint comments may be deleted. -->
-
-
-<!-- Written by the Team before the code: your own choice, a few sentences per answer. Everything else in the Submission follows from it. -->
+# Kachar Mine Digital Twin
 
 ## Concept
 
-**Enterprise:** Қашар темір кені карьері (Қазақстан, Қостанай облысы). Жобада карьердің кен өндіру және тасымалдау процестерінің цифрлық егізі жасалады.
+**Enterprise:** Қашар темір кені карьері (Қазақстан, Қостанай облысы). Жоба карьердің кен өндіру және тасымалдау процестерінің цифрлық моделін ұсынады.
 
 **Users:** Карьер диспетчерлері, өндіріс инженерлері және ауысым басшылары.
 
-**Decision:** Цифрлық егіз өндіріс өнімділігін жоспарлауға және арттыруға көмектеседі. Жүйе экскаваторлар мен самосвалдардың жұмысын модельдеп, техниканың жүктемесін, тоқтап қалу уақытын және тасымалданатын кен көлемін есептеуге арналған. Пайдаланушы әртүрлі өндірістік сценарийлерді салыстырып, тиімді жұмыс жоспарын таңдай алады.
+**Decision:** Экскаваторлар мен самосвалдардың есептік өнімділігін салыстыру, өндірістің шектеуші факторын анықтау және қосымша экскаватор енгізудің ықтимал әсерін бағалау.
 
-**Why this choice:** Мен Қашар карьерін таңдадым, себебі нақты кеніш негізінде өндіріс өнімділігін арттыру жолдарын зерттегім келеді. Менің мақсатым — техниканың бос тұру уақытын азайтып, кен өндіру мен тасымалдау жұмысын тиімді жоспарлайтын цифрлық жүйе жасау.
+**Why this choice:** Қашар карьерін таңдаудағы мақсат — нақты кеніш мысалында өндіріс өнімділігін жоспарлаудың цифрлық тәсілін көрсету.
 
-**Real or fictional:** Жоба Қазақстандағы нақты Қашар темір кені карьеріне негізделеді. Карьер мен техниканың ашық жарияланған сипаттамалары пайдаланылатын болады. Қолжетімсіз өндірістік көрсеткіштер модельдік болжамдар ретінде белгіленеді. Жоба нақты карьердің толық көшірмесі емес, оның өндіріс өнімділігін жоспарлауға арналған цифрлық моделі болады.
+**Real or fictional:** Қашар — нақты карьер, бірақ жобадағы техника саны, сыйымдылығы және өнімділігі демонстрациялық модельдік болжамдар болып табылады.
 
 ## Team
 
-<!-- GitHub usernames of the Participants. Other personal data are not required: the repository becomes public after the Freeze (Rules, section 15). -->
-
 | GitHub |
 |---|
-|  |
+| ernarsajdullin05-wq |
 
 ## Mine
 
-<!-- Which part of a mining enterprise the Submission represents (open pit, underground mine, processing plant…), which objects are twins in OpenEgiz, how they are related, and where they are defined in the code. -->
+Жоба ашық тәсілмен кен өндіретін карьердің өндіріс және тасымалдау бөлігін модельдейді.
+
+OpenEgiz платформасында `org.openegiz.kachar:mine-01` цифрлық егізі қолданылады.
+
+Егіздің негізгі көрсеткіштері:
+- `production` — қазіргі есептік өнімділік.
+- `scenario_production` — үшінші экскаватор қосылғандағы өнімділік.
+- `improvement` — өнімділіктің пайыздық өсімі.
+
+Негізгі файлдар:
+- `team/kachar-mine/twins.json`
+- `team/kachar-mine/setup_twins.py`
+- `team/kachar-mine/simulator.py`
+- `team/kachar-mine/mqtt_simulator.py`
 
 ## Modules and What-if Scenarios
 
-<!-- Modules: functions on top of the twin, from the Mine Map or your own. What-if Scenarios: changes of an operating condition that can be run on the Stand without changing the code (close a road, stop equipment…). Only what works on the Stand is taken into account. -->
-
 | Module or What-if Scenario | What it does | How to see it on the Stand | How to undo it (scenarios) |
 |---|---|---|---|
-|  |  |  |  |
+| Production calculation | Самосвалдар мен экскаваторлардың есептік өткізу мүмкіндіктерін салыстырады | Grafana: Kachar Mine Digital Twin | Қажет емес |
+| Production monitoring | MQTT арқылы Ditto және InfluxDB жүйелеріне көрсеткіштерді жібереді | Grafana dashboard | Қажет емес |
+| Third excavator comparison (precomputed) | 2 және 3 экскаватор жағдайларын салыстырады: 800 және 1080 т/сағ | Grafana: What-if: 3 экскаватор | Бұл әзірге алдын ала есептелген салыстыру, интерактивті сценарий емес |
 
 ## What works and what does not
 
-<!-- What has been verified, what is unfinished, which bugs are known. -->
+**Жұмыс істейтіні:**
+- Python көмегімен өндіріс өнімділігін есептеу.
+- Eclipse Ditto ішінде цифрлық егіз жасау және жаңарту.
+- MQTT арқылы көрсеткіштер жіберу.
+- InfluxDB және Grafana арқылы нәтижелерді көрсету.
+- `bash team/kachar-mine/run.sh` командасымен модельді іске қосу.
+
+**Әзірге аяқталмағаны:**
+- Stand ішінде параметрлерді интерактивті өзгерту.
+- Техниканың нақты бос тұру уақытын есептеу.
+- Нақты карьердің өндірістік деректеріне қосылу.
+- Үздіксіз уақыттық симуляция.
 
 ## Data and Assumptions
 
-<!--
-- Synthetic and real data.
-- Sources of parameters: equipment data sheets, reference literature, industrial safety regulations, datasets.
-- Datasets: source, license, how they are provided (in the repository or downloaded per the README).
-Confidential data of organizations and personal data are prohibited.
--->
+Жобада синтетикалық деректер пайдаланылады.
+
+| Параметр | Модельдік мән |
+|---|---|
+| Самосвал саны | 4 |
+| Бір самосвалдың сыйымдылығы | 90 тонна |
+| Бір рейс ұзақтығы | 20 минут |
+| Экскаватор саны | 2 |
+| Бір экскаватор өнімділігі | 400 т/сағ |
+
+Есептеу:
+
+- Самосвалдардың өткізу мүмкіндігі: 4 × 90 × (60 / 20) = 1080 т/сағ.
+- Экскаваторлардың өткізу мүмкіндігі: 2 × 400 = 800 т/сағ.
+- Қазіргі жүйенің өнімділігі: min(1080, 800) = 800 т/сағ.
+- Үшінші экскаватор қосылса: min(1080, 1200) = 1080 т/сағ.
+- Есептік өсім: 35%.
+
+Бұл көрсеткіштер нақты Қашар карьерінің расталған өндірістік деректері емес. Сыртқы деректер жиыны қолданылмайды.
 
 ## Mine visualization
 
-<!-- Address on the Stand, dashboard or scene; what it shows. -->
+Grafana: http://localhost:3000
+
+Dashboard: **Kachar Mine Digital Twin**
+
+Dashboard ішінде:
+- Қазіргі өндіріс өнімділігі.
+- Үш экскаватор сценарийінің нәтижесі.
+- Өнімділік өсімі (%).
+
+Dashboard файлы:
+`deploy/compose/grafana/dashboards/kachar-dashboard-ready.json`
 
 ## Limitations
 
+Модель өндіріс өнімділігін техника топтарының өткізу мүмкіндіктерінің минимумы арқылы бағалайды.
+
+Ол жол жағдайын, жөндеуді, ауысым үзілістерін, тиеу кезегін, жанармай шығынын және техниканың нақты бос тұру уақытын есепке алмайды.
+
+What-if нәтижесі алдын ала есептеледі; әзірге оны Stand интерфейсінде код өзгертпей іске қосу мүмкін емес.
+
 ## Presentation
 
-`presentation.pdf` in the repository root. Video (optional): <link>
+`presentation.pdf` файлы жоба түбірінде орналастырылады.
 
 ---
 
