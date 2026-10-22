@@ -18,6 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": null,
   "links": [],
   "panels": [
     {
@@ -135,11 +136,11 @@
       "pluginVersion": "12.3.0",
       "targets": [
         {
-          "query": "from(bucket: \"default\")\r\n  |> range(start: -24h)\r\n  |> filter(fn: (r) => r._measurement == \"mqtt_consumer\")\r\n  |> filter(fn: (r) => r._field == \"value_scenario_production_properties_value\")\r\n  |> filter(fn: (r) => r.thingId == \"org.openegiz.kachar:mine-01\")\r\n  |> group(columns: [\"_field\"])\r\n  |> last()\r\n  ",
+          "query": "\nimport \"array\"\n\narray.from(rows: [\n  {_time: now(), _value: float(v: int(v: \"${excavators}\")) * 400.0}\n])\n  |> map(fn: (r) => ({\n      r with\n      _value: if r._value > 1080.0 then 1080.0 else r._value\n  }))\n",
           "refId": "A"
         }
       ],
-      "title": "What-if: 3 экскаватор",
+      "title": "What-if: таңдалған экскаватор саны",
       "type": "stat"
     },
     {
@@ -242,7 +243,41 @@
   "schemaVersion": 42,
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "1",
+          "value": "1"
+        },
+        "label": "Экскаватор саны",
+        "name": "excavators",
+        "options": [
+          {
+            "selected": true,
+            "text": "1",
+            "value": "1"
+          },
+          {
+            "selected": false,
+            "text": "2",
+            "value": "2"
+          },
+          {
+            "selected": false,
+            "text": "3",
+            "value": "3"
+          },
+          {
+            "selected": false,
+            "text": "4",
+            "value": "4"
+          }
+        ],
+        "query": "1,2,3,4",
+        "type": "custom"
+      }
+    ]
   },
   "time": {
     "from": "now-6h",
@@ -252,5 +287,5 @@
   "timezone": "browser",
   "title": "Kachar Mine Digital Twin",
   "uid": "ad9gwdl",
-  "version": 1
+  "version": 5
 }
