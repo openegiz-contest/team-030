@@ -1,0 +1,30 @@
+{
+  "org.openegiz.kachar:mine-01": {
+    "policyId": "default:basic_policy",
+    "attributes": {
+      "name": "Kachar Iron Ore Mine",
+      "location": "Kazakhstan",
+      "data_source": "simulation"
+    },
+    "features": {
+      "production": {
+        "properties": {
+          "value": 800,
+          "unit": "t/h"
+        }
+      },
+      "scenario_production": {
+        "properties": {
+          "value": 1080,
+          "unit": "t/h"
+        }
+      },
+      "improvement": {
+        "properties": {
+          "value": 35,
+          "unit": "%"
+        }
+      }
+    }
+  }
+}
