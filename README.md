@@ -51,3 +51,34 @@ Dashboard: Kachar Mine Digital Twin
 - `team/kachar-mine/run.sh` — іске қосу
 - `SUBMISSION.md` — жоба сипаттамасы
 - `presentation.pdf` — презентация
+
+## Kachar Mine Interactive Dashboard
+
+The Kachar Mine Digital Twin includes an interactive web dashboard.
+
+### Features
+- Animated mine equipment and haul trucks
+- Excavator and truck fleet controls
+- Maintenance simulation and equipment status
+- Production chart and pause/resume controls
+- Eclipse Ditto API integration
+- Production scenario comparison: 800 t/h vs 1080 t/h (+35%)
+
+### Start the dashboard
+
+First, start the OpenEgiz Docker platform using the deployment instructions.
+
+Then run:
+
+```bash
+bash team/kachar-mine/web/start.sh
+
+Open:
+
+http://localhost:8766/
+
+The dashboard reads simulated production data from Eclipse Ditto.
+The animated equipment and what-if controls are browser-side simulations.
+
+The local file `deploy/compose/.env` must contain `DITTO_PASSWORD`.
+Do not commit passwords or `.env` files to GitHub.
