@@ -43,6 +43,13 @@
     animation: drive 9s linear infinite alternate;
   }
 </style>
+
+<style>
+body.simulation-paused .fleet-truck {
+    animation-play-state: paused !important;
+}
+</style>
+
 </head>
 <body>
 <header>
@@ -95,6 +102,7 @@
 <section class="card" style="margin-top:20px">
   <h2>📈 Өндіріс мониторингі</h2>
   <p>Өндірілген кен: <strong id="totalOre">0.00 тонна</strong></p>
+  <button id="simulationToggle" style="padding:12px 24px;background:#38bdf8;color:#07111f;border:0;border-radius:8px;font-weight:bold;cursor:pointer;margin-bottom:14px">⏸ Симуляцияны тоқтату</button>
   <canvas id="productionChart" width="900" height="280"
           style="width:100%;background:#101b2e;border-radius:10px"></canvas>
   <p class="note">Симуляция: 1 нақты секунд = 1 модельдік минут.</p>
@@ -163,6 +171,7 @@ updateMine();
 <script>
 let totalOre = 0;
 let simulatedMinutes = 0;
+let simulationRunning = true;
 const history = [0];
 
 function drawProductionChart() {
@@ -201,6 +210,7 @@ function drawProductionChart() {
 }
 
 setInterval(() => {
+  if (!simulationRunning) return;
   const e = Number(document.getElementById("excavators").value);
   const t = Number(document.getElementById("trucks").value);
 
@@ -224,6 +234,12 @@ setInterval(() => {
 
   drawProductionChart();
 }, 1000);
+
+document.getElementById("simulationToggle").addEventListener("click", () => {
+  simulationRunning = !simulationRunning;
+  document.getElementById("simulationToggle").textContent =
+    simulationRunning ? "⏸ Симуляцияны тоқтату" : "▶ Симуляцияны жалғастыру";
+});
 
 drawProductionChart();
 </script>
@@ -277,6 +293,16 @@ document.getElementById("excavators").addEventListener("input", () => {
 
 setInterval(refreshMaintenance, 1000);
 refreshMaintenance();
+</script>
+
+
+<script>
+document.getElementById("simulationToggle").addEventListener("click", () => {
+    document.body.classList.toggle(
+        "simulation-paused",
+        !simulationRunning
+    );
+});
 </script>
 
 </body>
