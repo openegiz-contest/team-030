@@ -402,5 +402,86 @@ document.getElementById("simulationToggle")
 renderEquipmentStatus();
 </script>
 
+
+<style>
+.ditto-panel {
+  margin: 24px 0;
+  padding: 24px;
+  background: #142338;
+  border: 1px solid #30445c;
+  border-radius: 14px;
+  color: white;
+}
+.ditto-values {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+.ditto-value {
+  background: #20344b;
+  border-radius: 10px;
+  padding: 18px;
+}
+.ditto-value strong {
+  display: block;
+  font-size: 28px;
+  margin-top: 10px;
+}
+</style>
+
+<section class="ditto-panel">
+  <h2>🔗 Eclipse Ditto — нақты байланыс</h2>
+  <p id="dittoStatus">🟡 Қосылу тексерілуде...</p>
+
+  <div class="ditto-values">
+    <div class="ditto-value">
+      Қазіргі өндіріс
+      <strong id="dittoProduction">—</strong>
+    </div>
+    <div class="ditto-value">
+      Жаңа сценарий
+      <strong id="dittoScenario">—</strong>
+    </div>
+    <div class="ditto-value">
+      Өндіріс өсімі
+      <strong id="dittoImprovement">—</strong>
+    </div>
+  </div>
+  <p style="font-size:13px;opacity:.7">
+    Дерек көзі: Eclipse Ditto · модельдік өндіріс деректері
+  </p>
+</section>
+
+<script>
+async function refreshDitto() {
+  const status = document.getElementById("dittoStatus");
+
+  try {
+    const response = await fetch("/api/ditto", {cache: "no-store"});
+    if (!response.ok) throw new Error("API error");
+
+    const data = await response.json();
+    if (!data.connected) throw new Error("Disconnected");
+
+    status.textContent = "🟢 Connected — Eclipse Ditto";
+    document.getElementById("dittoProduction").textContent =
+      data.production + " т/сағ";
+    document.getElementById("dittoScenario").textContent =
+      data.scenario + " т/сағ";
+    document.getElementById("dittoImprovement").textContent =
+      "+" + data.improvement + "%";
+  } catch (error) {
+    status.textContent = "🔴 Disconnected — Eclipse Ditto";
+    document.getElementById("dittoProduction").textContent = "—";
+    document.getElementById("dittoScenario").textContent = "—";
+    document.getElementById("dittoImprovement").textContent = "—";
+  }
+}
+
+refreshDitto();
+setInterval(refreshDitto, 5000);
+</script>
+
 </body>
 </html>
