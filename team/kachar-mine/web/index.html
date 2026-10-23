@@ -305,5 +305,102 @@ document.getElementById("simulationToggle").addEventListener("click", () => {
 });
 </script>
 
+
+<style>
+.equipment-panel {
+  margin: 24px 0;
+  padding: 22px;
+  background: #142338;
+  border: 1px solid #30445c;
+  border-radius: 14px;
+  color: white;
+}
+
+.equipment-panel h2 {
+  margin-top: 0;
+}
+
+.equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+}
+
+.equipment-item {
+  padding: 15px;
+  border-radius: 10px;
+  background: #20344b;
+  border-left: 4px solid #22c55e;
+}
+
+.equipment-item.repair {
+  border-left-color: #f59e0b;
+}
+
+.equipment-item.paused {
+  border-left-color: #94a3b8;
+}
+
+.equipment-item strong {
+  display: block;
+  margin-bottom: 8px;
+}
+</style>
+
+<section class="equipment-panel">
+  <h2>🚛 Техникалардың жағдайы</h2>
+  <div id="equipmentStatus" class="equipment-grid"></div>
+</section>
+
+<script>
+function renderEquipmentStatus() {
+  const total = Number(document.getElementById("trucks").value);
+  const maintenance = Math.min(
+    total,
+    Number(document.getElementById("maintenanceTrucks").value)
+  );
+
+  const active = total - maintenance;
+  const panel = document.getElementById("equipmentStatus");
+
+  panel.innerHTML = "";
+
+  for (let i = 1; i <= total; i++) {
+    const card = document.createElement("div");
+    card.className = "equipment-item";
+
+    let status = "🟢 Жұмыс істеп тұр";
+
+    if (i > active) {
+      status = "🟠 Жөндеуде";
+      card.classList.add("repair");
+    } else if (!simulationRunning) {
+      status = "⏸ Тоқтатылған";
+      card.classList.add("paused");
+    }
+
+    const title = document.createElement("strong");
+    title.textContent = "🚛 Жүк көлігі #" + i;
+
+    const description = document.createElement("span");
+    description.textContent = status;
+
+    card.append(title, description);
+    panel.appendChild(card);
+  }
+}
+
+document.getElementById("trucks")
+  .addEventListener("input", renderEquipmentStatus);
+
+document.getElementById("maintenanceTrucks")
+  .addEventListener("input", renderEquipmentStatus);
+
+document.getElementById("simulationToggle")
+  .addEventListener("click", renderEquipmentStatus);
+
+renderEquipmentStatus();
+</script>
+
 </body>
 </html>
